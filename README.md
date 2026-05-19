@@ -137,28 +137,38 @@ const ADMIN_EMAIL = "example@example.com";
 
 Optional: configure therapist email mapping for notifications.
 
-🔄 Triggers Setup
-Form Submission Trigger
-Function: onFormSubmit
-Event: Google Form submission
-Daily Summary Trigger (Optional)
-Function: sendDailyRoomSummaries
-Schedule: Daily (recommended 8:00 AM)
-🧭 Manual Testing
+## 🔄 Triggers Setup
+
+### Form Submission Trigger
+- **Function:** `onFormSubmit`
+- **Event:** Google Form submission  
+
+### Daily Summary Trigger (Optional)
+- **Function:** `sendDailyRoomSummaries`  
+- **Schedule:** Daily (recommended 8:00 AM)  
+
+---
+
+## 🧭 Manual Testing
 
 For debugging or testing:
 
-Open Apps Script editor
-Select function (onFormSubmit or sendDailyRoomSummaries)
-Click Run ▶
-Verify:
-Google Calendar event creation
-Email notifications
-Script execution logs
-🔮 Future Improvements
-Admin dashboard UI for scheduling visibility
-Analytics for room utilization
-Preference-based scheduling rules
-Database-backed scheduling engine
-Migration to AWS/Azure cloud architecture
-Multi-location scheduling support
+- Open Apps Script editor  
+- Select function (`onFormSubmit` or `sendDailyRoomSummaries`)  
+- Click **Run ▶**
+
+### Verify:
+- Google Calendar event creation  
+- Email notifications  
+- Script execution logs  
+
+---
+
+## 🔮 Future Improvements
+
+- Admin dashboard UI for scheduling visibility  
+- Analytics for room utilization  
+- Preference-based scheduling rules  
+- Database-backed scheduling engine  
+- Migration to AWS/Azure cloud architecture  
+- Multi-location scheduling support  
