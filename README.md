@@ -1,106 +1,164 @@
-# Google Workspace Room Scheduling Automation
+# Google Workspace Resource Scheduling & Workflow Orchestration System
 
-Production-deployed Google Workspace room scheduling automation built with Apps Script and Google Calendar API to prevent double-booking and streamline clinical operations.
+Production-deployed Google Workspace automation system built with Apps Script and Google Calendar API to manage room scheduling, prevent conflicts, and streamline clinical workflow operations.
 
-## Production Use
+This system was deployed in a live clinical environment to automate therapist room scheduling, reduce manual coordination, and eliminate double-booking through rule-based workflow orchestration.
 
-This system was deployed in a live clinical environment to automate therapist room scheduling. It reduced manual coordination, prevented double-booking, and streamlined daily room assignment communication.
+---
 
-## Problem
+## 🧠 System Overview
 
-Manual room scheduling led to booking conflicts and inefficiencies. This system automates the entire reservation workflow from form submission to calendar event creation and daily reporting.
+This system automates a resource-constrained scheduling environment where multiple users, rooms, and time slots must be coordinated without conflicts.
 
-## Usage
+It models a real-world workflow orchestration system where incoming requests are processed, validated, assigned, and recorded across Google Workspace tools.
 
-1. User fills out a Google Form with room request details.
-2. Your script assigns a room and sends a confirmation email.
-3. At a scheduled time every morning, the script sends daily room summaries.
+---
 
-**Sample confirmation email:**
-> Room Confirmed: Room A  
-> Therapist: Jane Doe  
-> Time: 9:00 AM – 10:00 AM
+## 🚨 Problem Statement
 
-## Tech Stack
+Manual scheduling processes led to:
 
-- Google Apps Script
-- Google Calendar API
-- Google Forms trigger events
-- LockService for concurrency control
-- Automated email notifications
+- Double-booked rooms  
+- Inefficient manual coordination  
+- Lack of centralized scheduling visibility  
+- Communication delays between staff  
 
-## Core Features
+This system automates the entire scheduling workflow from request submission to calendar assignment and confirmation delivery.
 
-- Triggered on form submission
-- Input normalization and validation
-- Flexible time parsing (12hr and 24hr formats)
-- Buffer time enforcement
-- Multi-room fallback logic
-- Conflict detection across calendars
-- Automatic reassignment if room unavailable
-- Admin alerting for failures
-- Daily summary emails grouped by therapist
-- Race condition prevention using script locking
+---
 
-## System Logic Overview
+## ⚙️ System Architecture & Workflow
 
-1. Form submission triggers `onFormSubmit`.
-2. Lock acquired to prevent simultaneous double-booking.
-3. Room availability checked with buffer window.
-4. If requested room unavailable → next available room assigned.
-5. Event created in appropriate Google Calendar.
-6. Confirmation email sent to therapist.
-7. Daily summary emails generated per therapist.
+### 🔄 End-to-End Flow
 
-## Engineering Considerations
+1. User submits room request via Google Form  
+2. Response is recorded in connected Google Sheet  
+3. `onFormSubmit` trigger activates automation script  
+4. System evaluates room availability and constraints  
+5. Room is assigned or reassigned based on availability logic  
+6. Calendar event is created in Google Calendar  
+7. Confirmation email is sent to therapist  
+8. Daily summary reports are generated per provider  
 
-- Concurrency handled using `LockService`.
-- Buffer window prevents back-to-back booking conflicts.
-- Defensive error handling with admin alerts.
-- Calendar access validation.
+---
 
-## Future Improvements
+## 🧠 Core System Logic
 
-- Admin dashboard UI
-- Room usage analytics
-- Preference-based scheduling
-- Database-backed tracking
+- Multi-resource scheduling (rooms, staff, time slots)  
+- Conflict detection and prevention rules  
+- Buffer time enforcement between bookings  
+- Multi-room fallback assignment logic  
+- Automated scheduling validation  
+- Rule-based decision engine for allocation  
+- Daily aggregation and reporting system  
 
-## Setup
+---
 
-1. Open the **Google Sheet** that is linked to your Google Form (this Sheet stores form responses).
-2. Go to **Extensions → Apps Script** from that Sheet.
-3. In the Apps Script editor, create a new script file (e.g., `Code.gs`).
-4. Copy the contents of `src/Code.gs` into your new script file.
-5. Configure your script:
-   - Replace `calendarMap` entries with your own Google Calendar IDs.
-   - Replace or set `ADMIN_EMAIL` with your admin email address:
-     ```javascript
-     const ADMIN_EMAIL = "example@example.com";
-     ```
-   - Optional: Add name‑to‑email mappings in `therapistEmailMap` if you want different email handling.
-6. Set up triggers:
-   - **Form submit trigger → `onFormSubmit`**
-     - In the Apps Script editor, open **Triggers** (clock icon) → Add trigger → choose `onFormSubmit` → Event type: `From form submit`
-     - This ensures each form submission automatically checks availability and updates the calendar.
-   - Optional: **Time‑driven trigger → `sendDailyRoomSummaries`**
-     - Create a daily trigger (e.g., 8:00 AM) to send summary emails to staff about their scheduled rooms for the day.
+## 🏥 Production Use Case
 
-## Flow Overview
-- Form submission → Sheet responses → Apps Script onFormSubmit → Calendar event creation → Confirmation & summary emails.
+This system was deployed in a live clinical environment to:
 
-## How to Run
+- Automate therapist room scheduling  
+- Eliminate double-booking conflicts  
+- Improve operational efficiency  
+- Standardize scheduling communication  
+- Reduce manual administrative workload  
 
-- **Automatic execution (recommended)**:  
-  Once the script is bound to your Google Sheet and the triggers are set:
-  1. Each form submission will automatically run `onFormSubmit`.
-  2. Daily summary emails will be sent automatically if the time-driven trigger for `sendDailyRoomSummaries` is enabled.
+---
 
-- **Manual execution (for testing)**:  
-  1. Open the Apps Script editor from your Sheet (**Extensions → Apps Script**).  
-  2. Select the function `onFormSubmit` or `sendDailyRoomSummaries` from the dropdown.  
-  3. Click the **Run ▶** button to execute the function manually.  
-     - You may need to provide a mock `e` object for testing `onFormSubmit`.
-  4. Check your Google Calendar and email to confirm the script is working correctly.
+## ☁️ Cloud & Scalability Perspective
 
+Although built on Google Apps Script, the system is designed with cloud architecture principles and can be extended into:
 
+- AWS serverless scheduling systems (Lambda + API Gateway + DynamoDB)  
+- Azure workflow automation services  
+- Microservice-based booking platforms  
+- API-driven scheduling orchestration engines  
+
+---
+
+## 🛠 Tech Stack
+
+- Google Apps Script  
+- Google Calendar API  
+- Google Forms (trigger input source)  
+- Google Sheets (data persistence layer)  
+- LockService (concurrency control)  
+- Gmail API (email automation)  
+
+---
+
+## 🚀 Core Features
+
+- Triggered automation via form submission  
+- Input validation and normalization  
+- Flexible time parsing (12-hour and 24-hour formats)  
+- Buffer time enforcement for scheduling safety  
+- Multi-room fallback logic for availability conflicts  
+- Cross-calendar conflict detection  
+- Automated confirmation emails  
+- Daily summary reports grouped by therapist  
+- Race condition prevention using script locking  
+- Admin alerting for system failures  
+
+---
+
+## 🔐 Engineering Considerations
+
+- Concurrency handled via `LockService` to prevent race conditions  
+- Defensive error handling with admin alert notifications  
+- Calendar validation to ensure resource integrity  
+- Buffer windows prevent overlapping bookings  
+- Scalable logic structure for multi-resource expansion  
+
+---
+
+## 🧪 Setup & Deployment
+
+### 1. Script Installation
+
+1. Open the Google Sheet linked to the Google Form  
+2. Navigate to **Extensions → Apps Script**  
+3. Create or open `Code.gs`  
+4. Paste project script into editor  
+
+---
+
+## ⚙️ Configuration
+
+### Update Calendar Mappings
+
+Update calendar mappings in your script:
+
+```javascript
+calendarMap
+Set Admin Email
+const ADMIN_EMAIL = "example@example.com";
+
+Optional: configure therapist email mapping for notifications.
+
+🔄 Triggers Setup
+Form Submission Trigger
+Function: onFormSubmit
+Event: Google Form submission
+Daily Summary Trigger (Optional)
+Function: sendDailyRoomSummaries
+Schedule: Daily (recommended 8:00 AM)
+🧭 Manual Testing
+
+For debugging or testing:
+
+Open Apps Script editor
+Select function (onFormSubmit or sendDailyRoomSummaries)
+Click Run ▶
+Verify:
+Google Calendar event creation
+Email notifications
+Script execution logs
+🔮 Future Improvements
+Admin dashboard UI for scheduling visibility
+Analytics for room utilization
+Preference-based scheduling rules
+Database-backed scheduling engine
+Migration to AWS/Azure cloud architecture
+Multi-location scheduling support
