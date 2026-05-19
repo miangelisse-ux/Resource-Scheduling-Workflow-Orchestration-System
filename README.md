@@ -136,6 +136,7 @@ Set Admin Email
 const ADMIN_EMAIL = "example@example.com";
 
 Optional: configure therapist email mapping for notifications.
+```javascript
 
 ---
 
