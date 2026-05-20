@@ -6,6 +6,27 @@ Defines how the scheduling system handles growth in users, requests, and resourc
 
 ---
 
+```mermaid
+flowchart LR
+
+A[Client Requests] --> B[Load Balancer]
+
+B --> C1[Scheduler Instance 1]
+B --> C2[Scheduler Instance 2]
+B --> C3[Scheduler Instance 3]
+
+C1 --> D[Central Conflict Engine]
+C2 --> D
+C3 --> D
+
+D --> E[(Shared State / Database)]
+
+E --> F[Cache Layer]
+F --> G[Fast Availability Reads]
+```
+
+---
+
 ## ⚙️ Scaling Model
 
 ### Horizontal Scaling
