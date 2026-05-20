@@ -8,16 +8,21 @@ Defines how scheduling updates propagate across users and maintain consistency i
 
 ## 🔄 Real-Time Flow
 
-```
-User Action
-   ↓
-Event Trigger
-   ↓
-State Update (Central System)
-   ↓
-Broadcast Update
-   ↓
-Client UI Sync
+```markdown
+## ⚡ Real-Time Synchronization Flow
+
+```mermaid
+sequenceDiagram
+participant U as User
+participant S as Scheduling System
+participant DB as State Store
+participant C as Connected Clients
+
+U->>S: Create / Update Booking
+S->>DB: Validate + Commit State
+DB-->>S: Confirmation
+S->>C: Broadcast Update Event
+C-->>U: UI Sync (Live Update)
 ```
 
 ---
