@@ -25,7 +25,7 @@ E -->|Conflict Found| X[Reject Booking Response]
 F -->|Success| Y[Confirmed Booking]
 
 H --> Z[User Notification]
-
+```
 ---
 
 ## ⚙️ Core Components
