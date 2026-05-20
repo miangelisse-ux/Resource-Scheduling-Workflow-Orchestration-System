@@ -9,22 +9,17 @@ Defines deployment and automation strategy for validating and shipping changes s
 
 ## 🔄 Pipeline Flow
 
-```
-Code Push
-   ↓
-Lint + Static Validation
-   ↓
-Unit Tests (Scheduling Logic)
-   ↓
-Integration Tests (Workflow Flow)
-   ↓
-Build Artifact
-   ↓
-Deploy (Staging)
-   ↓
-Manual / Automated Approval
-   ↓
-Production Deployment
+```mermaid
+flowchart TD
+
+A[Code Push] --> B[Lint & Static Checks]
+B --> C[Unit Tests - Scheduling Logic]
+C --> D[Integration Tests - Workflow Engine]
+D --> E[Build Artifact]
+E --> F[Deploy to Staging]
+F --> G{Approval Gate}
+G -->|Approved| H[Production Deployment]
+G -->|Rejected| I[Rollback / Fix Cycle]
 ```
 
 ---
